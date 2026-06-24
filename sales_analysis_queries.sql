@@ -1,0 +1,74 @@
+create database sales_project;
+use sales_project;
+CREATE TABLE sales_data (
+    ORDERNUMBER INT,
+    QUANTITYORDERED INT,
+    PRICEEACH DECIMAL(10,2),
+    ORDERLINENUMBER INT,
+    SALES DECIMAL(10,2),
+    ORDERDATE VARCHAR(20),
+    STATUS VARCHAR(20),
+    QTR_ID INT,
+    MONTH_ID INT,
+    YEAR_ID INT,
+    PRODUCTLINE VARCHAR(50),
+    MSRP INT,
+    PRODUCTCODE VARCHAR(20),
+    CUSTOMERNAME VARCHAR(100),
+    PHONE VARCHAR(20),
+    ADDRESSLINE1 VARCHAR(100),
+    ADDRESSLINE2 VARCHAR(100),
+    CITY VARCHAR(50),
+    STATE VARCHAR(50),
+    POSTALCODE VARCHAR(20),
+    COUNTRY VARCHAR(50),
+    TERRITORY VARCHAR(50),
+    CONTACTLASTNAME VARCHAR(50),
+    CONTACTFIRSTNAME VARCHAR(50),
+    DEALSIZE VARCHAR(20)
+);
+
+select * from sales_data limit 5;
+
+-- 1. Which year had the highest sales? 
+
+SELECT YEAR_ID, ROUND(SUM(SALES)) AS Total_Sales
+FROM SALES_DATA
+group by YEAR_ID
+order by Total_Sales desc;
+
+-- 2. Which country generates the most revenue? 
+
+SELECT COUNTRY, ROUND(SUM(SALES)) AS MOST_REVENUE
+FROM SALES_DATA
+group by COUNTRY
+order by MOST_REVENUE desc;
+
+-- Which product line sells the most? 
+SELECT PRODUCTLINE, ROUND(SUM(SALES)) AS MOST_REVENUE
+FROM SALES_DATA
+group by PRODUCTLINE
+order by MOST_REVENUE desc;
+
+-- Who are the top 10 customers by sales?
+
+SELECT CUSTOMERNAME, ROUND(SUM(SALES)) AS MOST_REVENUE
+FROM SALES_DATA
+group by CUSTOMERNAME
+order by MOST_REVENUE DESC LIMIT 10;
+
+-- Which deal size contributes most to sales?
+SELECT DEALSIZE, ROUND(SUM(SALES)) AS MOST_REVENUE
+FROM SALES_DATA
+group by DEALSIZE
+order by MOST_REVENUE DESC;
+
+-- Which month has the highest sales?
+
+SELECT MONTH_ID, ROUND(SUM(SALES)) AS HIGHEST_SALE
+FROM SALES_DATA
+group by MONTH_ID
+order by HIGHEST_SALE DESC;
+
+
+
